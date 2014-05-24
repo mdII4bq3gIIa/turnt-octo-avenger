@@ -24,43 +24,48 @@ li.d0:after
 	content: "\200C";
 }
 
-li.d1:after,
+li.cell.d1:after,
 d1
 {
 	content: ".";
 }
 
-li.d2:after,
+li.cell.d2:after,
 d2
 {
 	content: ",";
 }
 
-li.d3:after,
+li.cell.d3:after,
 d3
 {
 	content: "-";
 }
 
-li.d4:after,
+li.cell.d4:after,
 d4
 {
 	content: "+";
 }
 
-li.d5:after,
+li.cell.d5:after,
 d5
 {
 	content: "*";
 }
 
-li.d6:after,
+li.cell.d6:after,
 d6
 {
 	content: "#";
 }
 
-li.d0.h1:after,
+body.grid li.d0.g1:after,
+gridcells
+{
+	content: "`";
+}
+
 li.d1.h1:after,
 li.d2.h1:after,
 li.d3.h1:after,
@@ -88,6 +93,28 @@ li {
 	width: 10px;
 	height: 10px;
 	cursor: default;
+}
+
+.command {
+	display: inline-block;
+	cursor: default;
+	font-size: small;
+	font-variant: small-caps;
+	text-align: center;
+	width: 100px;
+	min-height: 10px;
+	background: #d0f0f0;
+	border: 1px solid black;
+	margin: 0px 2px;
+}
+
+.command:hover {
+	color: #4040c0;
+	background: white;
+}
+
+.command h3 {
+	margin: 2px 0px;
 }
 </style>
 
