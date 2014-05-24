@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ASCII Doodle</title>
+<style type="text/css">
+body {
+	height: 90%;
+	margin: 0;
+}
+
+div.grid {
+	display: inline-block;
+}
+
+ul.grid {
+	list-style: none;
+	min-width: 10px;
+	text-align: center;
+	padding: 0px;
+}
+
+li.d0:after
+{
+	content: "\200C";
+}
+
+li.d1:after,
+d1
+{
+	content: ".";
+}
+
+li.d2:after,
+d2
+{
+	content: ",";
+}
+
+li.d3:after,
+d3
+{
+	content: "-";
+}
+
+li.d4:after,
+d4
+{
+	content: "+";
+}
+
+li.d5:after,
+d5
+{
+	content: "*";
+}
+
+li.d6:after,
+d6
+{
+	content: "#";
+}
+
+li.d0.h1:after,
+li.d1.h1:after,
+li.d2.h1:after,
+li.d3.h1:after,
+li.d4.h1:after,
+li.d5.h1:after,
+dall
+{
+}
+
+li.d0.h1,
+li.d1.h1,
+li.d2.h1,
+li.d3.h1,
+li.d4.h1,
+li.d5.h1,
+li.d6.h1,
+dddd {
+	background-color: cyan;
+	box-shadow: 0px 0px #000 inset;
+}
+
+li {
+	font-size: 8px;
+	font-weight: bold;
+	width: 10px;
+	height: 10px;
+	cursor: default;
+}
+</style>
+
+<script type="text/html" id="cursor">
+	<div id="cursor"></div>
+</script>
+
+<script type="text/html" id="message">
+	<li class="message"><span class="copy">{{ copy }}</span><span class="mult"></span></li>
+</script>
+
+<script type="text/html" id="ui">
+	<div style="margin-top: 120px;"><div class="credits">comments to: developer@gridgames.net - version alpha 0.1</div></div>
+</script>
+
+<script type="text/html" id="column">
+	<div>
+		<ul class="grid">
+		</ul>
+	</div>
+</script>
+
+<script type="text/html" id="cell">
+		<li class="cell"/>
+</script>
+</head>
+<body>
+<script type="text/javascript" src="../third/ICanHaz.js"></script>
+<script type="text/javascript" src="../third/jquery-1.10.1.js"></script>
+<script type="text/javascript" src="../third/underscore.js"></script>
+<script type="text/javascript" src="gui.js"></script>
+<script type="text/javascript" src="xiaolin.js"></script>
+<script type="text/javascript">
+
+$(function() {
+	xiaolin.createtable();
+	Gui.grid();
+	Gui.interactive();
+});
+
+</script>
+</body>
