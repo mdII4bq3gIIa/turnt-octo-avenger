@@ -19,6 +19,10 @@ ul.grid {
 	padding: 0px;
 }
 
+.small ul.grid {
+	min-width: 6px;
+}
+
 li.d0:after
 {
 	content: "\200C";
@@ -95,6 +99,11 @@ li {
 	cursor: default;
 }
 
+.small li {
+	width: 6px;
+	height: 6px;
+}
+
 .command {
 	display: inline-block;
 	cursor: default;
@@ -141,16 +150,18 @@ li {
 		<li class="cell"/>
 </script>
 </head>
-<body>
-<script type="text/javascript" src="../third/ICanHaz.js"></script>
-<script type="text/javascript" src="../third/jquery-1.10.1.js"></script>
-<script type="text/javascript" src="../third/underscore.js"></script>
+<body class="small">
+<script type="text/javascript" src="/third/ICanHaz.min.js"></script>
+<script type="text/javascript" src="/third/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="/third/underscore-min.js"></script>
 <script type="text/javascript" src="gui.js"></script>
 <script type="text/javascript" src="xiaolin.js"></script>
 <script type="text/javascript">
 
 $(function() {
 	xiaolin.createtable();
+	Gui.height = 60;
+	Gui.width = 120;
 	Gui.grid();
 	Gui.interactive();
 });

@@ -1,20 +1,24 @@
 var Gui = {
+	height: 40,
+	width: 80,
+
 	start: {x: 0, y: 0},
 	on: false,
 
 	mode: "line",
 	modes: {
+		box: "drawBox",
 		line: "drawLine",
 		multiline: "drawMultiLine"
 	},
 
 	grid: function() {
 		var col, tally, cell, dark, i = 0;
-		for (i = 0; i < 81; i++) {
+		for (i = 0; i < this.width + 1; i++) {
 			col = $("<div/>").addClass("grid");
 			var c = $("<ul/>").addClass("grid");
 			tally = 0;
-			for (j = 0; j < 41; j++) {
+			for (j = 0; j < this.height + 1; j++) {
 				cell = ich.cell();
 				var ccc = $(cell).attr("id", i + "x" + tally).addClass("d0");
 				if (!(i % 5 || j % 5)) {
@@ -37,13 +41,15 @@ var Gui = {
 		var d = $("<div/>")
 		d.append('<div id="line" class="command"><h3>Line</h3></div>');
 		d.append('<div id="mline" class="command"><h3>Multi Line</h3></div>');
+		d.append('<div id="box" class="command"><h3>Box</h3></div>');
 		d.append('<div id="clear" class="command"><h3>Clear</h3></div>');
 		d.append('<div id="grid" class="command"><h3>Show Grid</h3></div>');
+		d.append('<div id="size" class="command"><h3>Small Grid</h3></div>');
 		$("body").append(d);
 		$("body").append('<div id="status"><span id="message"/></div>');
 		$("div.grid").on("mouseover", "li", function() {
 			$(this).addClass("h1");
-			});
+		});
 		$("div.grid").on("mouseout", "li", function() {
 			$(this).removeClass("h1");
 		});
@@ -63,6 +69,11 @@ var Gui = {
 			Gui.mode = "multiline";
 			Gui.message("Multi line mode");
 		});
+		$("#box").on("click", function() {
+			Gui.reset();
+			Gui.mode = "box";
+			Gui.message("box mode");
+		});
 		$("#grid").on("click", function() {
 			if ($("body").hasClass("grid")) {
 				$("body").removeClass("grid");
@@ -70,7 +81,16 @@ var Gui = {
 				$("body").addClass("grid");
 			}
 		});
+		$("#size").on("click", function() {
+			if ($("body").hasClass("small")) {
+				$("body").removeClass("small");
+			} else {
+				$("body").addClass("small");
+			}
+		});
+		$("#clear").on("click", Gui.clear);
 	},
+
 
 	/*
 	darken: function() {
@@ -104,6 +124,53 @@ var Gui = {
 		}
 
 		Gui[this.modes[this.mode]](point);
+	},
+
+	clear: function() {
+		Gui.whitecell(".cell");
+		Gui.reset();
+	},
+
+	whitecell: function(sel) {
+		$(sel)
+			.removeClass("d1")
+			.removeClass("d2")
+			.removeClass("d3")
+			.removeClass("d4")
+			.removeClass("d5")
+			.removeClass("d6")
+			.addClass("d0");
+	},
+
+	paintBox: function(point, d) {
+		var s, i, j;
+		if (this.start[0] > point[0]) {
+			s = this.start[0];
+			this.start[0] = point[0];
+			point[0] = s;
+		}
+		if (this.start[1] > point[1]) {
+			s = this.start[1];
+			this.start[1] = point[1];
+			point[1] = s;
+		}
+		for (i = this.start[0]; i < point[0] + 1; i++) {
+			for (j = this.start[1]; j < point[1] + 1; j++) {
+				this.whitecell("#" + i + "x" + j);
+				$("#" + i + "x" + j)
+					.removeClass("d0")
+					.addClass(d);
+			}
+		}
+	},
+
+	drawBox: function(point) {
+		if (this.on) {
+			this.paintBox(point, "d3");
+			this.on = false;
+		} else {
+			this.store(point);
+		}
 	},
 
 	drawLine: function(point) {
